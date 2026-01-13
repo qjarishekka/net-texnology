@@ -1,0 +1,993 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+
+## Title
+title: "Отчёт по лабораторной работе № 8"
+subtitle: "Адресация IPv4 и IPv6. Настройка маршрутизации"
+license: "CC BY"
+---
+
+# Цель работы
+
+Изучение принципов маршрутизации в IPv4- и IPv6-сетях и принципов настройки сетевого оборудования.
+
+# Задание
+
+Задана сеть, адреса сегментов сети , адреса, назначаемые
+интерфейсам устройств . Требуется настроить динамическую маршрутизацию по протоколам RIP, OSPF.
+
+![схема](image/esquema1.png){#fig-100 width=70%}
+
+
+# Выполнение лабораторной работы
+
+## Настройка динамической маршрутизации в сетях IPv4 и IPv6
+
+### Топология моделируемой сети
+
+сначала я поставил все элементы как видно в рисунке
+
+
+![name](image/01.jpg){#fig-00 width=70%}
+
+Потом я дал компьютерам PC1 и PC2 IP-адрессы 
+
+    PC1:
+
+    ip 10.0.10.10/24 10.0.10.1
+    save
+    show ip
+
+    PC2:
+    ip 10.0.11.10/24 10.0.11.1
+    save
+    show ip
+
+
+![IP-адрессы PC1](image/02.jpg){#fig-002 width=70%}
+
+![IP-адрессы PC2](image/03.jpg){#fig-003 width=70%}
+
+
+Потом я настроил устройства msk-qscalizaya-gw-0x
+
+msk-qscalizaya-gw-01:
+
+В данном шаге выполняется базовая настройка маршрутизатора msk-qscalizaya-gw-01.
+Задаётся имя устройства, после чего на интерфейсах eth0, eth1 и eth2 настраиваются IPv4-адреса в соответствии с таблицей адресации.
+Все интерфейсы переводятся в активное состояние командой no shutdown.
+После завершения настройки конфигурация сохраняется в энергонезависимую память, и текущая конфигурация проверяется командой show running-config.
+
+
+
+
+    frr# configure terminal
+    frr(config)# hostname msk-qscalizaya-gw-01
+    msk-qscalizaya-gw-01(config)# interface eth0
+    msk-qscalizaya-gw-01(config-if)# ip address 10.0.10.1/24
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth1
+    msk-qscalizaya-gw-01(config-if)# ip address 10.0.1.1/24
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth2
+    msk-qscalizaya-gw-01(config-if)# ip address 10.0.4.2/24
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+    msk-qscalizaya-gw-01# show running-config
+
+![настройка в gw01](image/04.jpg){#fig-004 width=70%}
+
+
+
+msk-qscalizaya-gw-02:
+
+На маршрутизаторе msk-qscalizaya-gw-02 выполняется задание имени устройства и настройка IPv4-адресов на интерфейсах eth0 и eth1.
+Интерфейсы активируются командой no shutdown, что обеспечивает их готовность к передаче данных.
+После этого конфигурация сохраняется, и выполняется просмотр текущих параметров маршрутизатора.
+
+    frr# configure terminal
+    frr(config)# hostname msk-qscalizaya-gw-02
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# ip address 10.0.1.2/24
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# interface eth1
+    msk-qscalizaya-gw-02(config-if)# ip address 10.0.2.1/24
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+    msk-qscalizaya-gw-02# show running-config
+
+
+![настройка в gw02](image/05.jpg){#fig-005 width=70%}
+
+msk-qscalizaya-gw-03:
+
+В данном этапе производится настройка маршрутизатора msk-qscalizaya-gw-03.
+Назначается имя устройства и задаются IPv4-адреса на интерфейсах eth0, eth1 и eth2, обеспечивающих подключение к соседним сегментам сети.
+Все интерфейсы включаются, конфигурация сохраняется, после чего проверяется её корректность.
+
+    frr# configure terminal
+    frr(config)# hostname msk-qscalizaya-gw-03
+    msk-qscalizaya-gw-03(config)# interface eth0
+    msk-qscalizaya-gw-03(config-if)# ip address 10.0.11.1/24
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth1
+    msk-qscalizaya-gw-03(config-if)# ip address 10.0.2.2/24
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth2
+    msk-qscalizaya-gw-03(config-if)# ip address 10.0.3.1/24
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+    msk-qscalizaya-gw-03# show running-config
+
+
+![настройка в gw03](image/06.jpg){#fig-006 width=70%}
+
+
+msk-qscalizaya-gw-04:
+
+На маршрутизаторе msk-qscalizaya-gw-04 задаётся имя устройства и настраиваются IPv4-адреса на интерфейсах eth0 и eth1.
+Интерфейсы переводятся в рабочее состояние, что позволяет маршрутизатору участвовать в передаче сетевого трафика.
+В завершение конфигурация сохраняется и выводится для проверки.
+
+    frr# configure terminal
+    frr(config)# hostname msk-qscalizaya-gw-04
+    msk-qscalizaya-gw-04(config)# interface eth0
+    msk-qscalizaya-gw-04(config-if)# ip address 10.0.3.2/24
+    msk-qscalizaya-gw-04(config-if)# no shutdown
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# interface eth1
+    msk-qscalizaya-gw-04(config-if)# ip address 10.0.4.1/24
+    msk-qscalizaya-gw-04(config-if)# no shutdown
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+    msk-qscalizaya-gw-04# show running-config
+
+![настройка в gw04](image/07.jpg){#fig-007 width=70%}
+
+
+Потом я дал ipv6 адресы компьютерам
+
+    PC1:
+
+    ip 2001:10::a/64
+    save
+    show ipv6
+
+    PC2:
+    ip 2001:11::a/64
+    save
+    show ipv6
+
+![ipv6 PC1](image/08.jpg){#fig-008 width=70%}
+
+![ipv6 PC2](image/09.jpg){#fig-009 width=70%}
+
+
+Потом я настроил IPv6 адресы на интерфейсах маршрутизаторов
+
+msk-qscalizaya-gw-01:
+
+    msk-qscalizaya-gw-01# configure terminal
+    msk-qscalizaya-gw-01(config)# ipv6 forwarding
+    msk-qscalizaya-gw-01(config)# interface eth0
+    msk-qscalizaya-gw-01(config-if)# ipv6 address 2001:10::1/64
+    msk-qscalizaya-gw-01(config-if)# no ipv6 nd suppress-ra
+    msk-qscalizaya-gw-01(config-if)# ipv6 nd prefix 2001:10::/64
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth1
+    msk-qscalizaya-gw-01(config-if)# ipv6 address 2001:1::1/64
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth2
+    msk-qscalizaya-gw-01(config-if)# ipv6 address 2001:4::2/64
+    msk-qscalizaya-gw-01(config-if)# no shutdown
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+    msk-qscalizaya-gw-01# show running-config
+
+На маршрутизаторе включена поддержка IPv6, настроены IPv6-адреса на всех интерфейсах и активирована рассылка Router Advertisement для локальной сети. Конфигурация сохранена и маршрутизатор готов к маршрутизации IPv6-трафика.
+
+![конфигурация ipv6 PC1](image/10.jpg){#fig-010 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# ipv6 forwarding
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# ipv6 address 2001:1::2/64
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# interface eth1
+    msk-qscalizaya-gw-02(config-if)# ipv6 address 2001:2::1/64
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+    msk-qscalizaya-gw-02# show running-config
+
+На маршрутизаторе включена IPv6-маршрутизация и настроены IPv6-адреса на межмаршрутизаторских интерфейсах, обеспечивающих передачу IPv6-трафика между соседними узлами сети.
+
+![конфигурация ipv6 PC2](image/11.jpg){#fig-011 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    msk-qscalizaya-gw-03# configure terminal
+    msk-qscalizaya-gw-03(config)# ipv6 forwarding
+    msk-qscalizaya-gw-03(config)# interface eth0
+    msk-qscalizaya-gw-03(config-if)# ipv6 address 2001:11::1/64
+    msk-qscalizaya-gw-03(config-if)# no ipv6 nd suppress-ra
+    msk-qscalizaya-gw-03(config-if)# ipv6 nd prefix 2001:11::/64
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth1
+    msk-qscalizaya-gw-03(config-if)# ipv6 address 2001:2::2/64
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth2
+    msk-qscalizaya-gw-03(config-if)# ipv6 address 2001:3::1/64
+    msk-qscalizaya-gw-03(config-if)# no shutdown
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+    msk-qscalizaya-gw-03# show running-config
+
+Маршрутизатор настроен для работы с IPv6, сконфигурированы IPv6-адреса на всех интерфейсах и включена автоматическая выдача префикса для оконечных устройств через Router Advertisement.
+
+![конфигурация ipv6 PC3](image/12.jpg){#fig-012 width=70%}
+
+msk-qscalizaya-gw-04:
+
+    msk-qscalizaya-gw-04# configure terminal
+    msk-qscalizaya-gw-04(config)# ipv6 forwarding
+    msk-qscalizaya-gw-04(config)# interface eth0
+    msk-qscalizaya-gw-04(config-if)# ipv6 address 2001:3::2/64
+    msk-qscalizaya-gw-04(config-if)# no shutdown
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# interface eth1
+    msk-qscalizaya-gw-04(config-if)# ipv6 address 2001:4::1/64
+    msk-qscalizaya-gw-04(config-if)# no shutdown
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+    msk-qscalizaya-gw-04# show running-config
+
+На маршрутизаторе включена поддержка IPv6 и настроены IPv6-адреса на интерфейсах, обеспечивающих связь с соседними маршрутизаторами и участие в IPv6-маршрутизации сети.
+
+
+![конфигурация ipv6 PC4](image/13.jpg){#fig-013 width=70%}
+
+### Настройка динамической маршрутизации по протоколу RIP.
+
+Здесь я начал настроеть динамическую маршрутизцию
+
+msk-qscalizaya-gw-01:
+
+    msk-qscalizaya-gw-01# configure terminal
+    msk-qscalizaya-gw-01(config)# router rip
+    msk-qscalizaya-gw-01(config-router)# version 2
+    msk-qscalizaya-gw-01(config-router)# network eth0
+    msk-qscalizaya-gw-01(config-router)# network eth1
+    msk-qscalizaya-gw-01(config-router)# network eth2
+    msk-qscalizaya-gw-01(config-router)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+
+На маршрутизаторе настроена динамическая маршрутизация IPv4 по протоколу RIP версии 2.
+В процесс RIP включены все интерфейсы маршрутизатора, что обеспечивает автоматический обмен маршрутной информацией со всеми соседними узлами сети.
+
+![конфигурация протокола RIP GW1](image/14.jpg){#fig-014 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# router rip
+    msk-qscalizaya-gw-02(config-router)# version 2
+    msk-qscalizaya-gw-02(config-router)# network eth0
+    msk-qscalizaya-gw-02(config-router)# network eth1
+    msk-qscalizaya-gw-02(config-router)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+
+На маршрутизаторе активирован протокол RIP v2 для IPv4 и включён обмен маршрутами через межмаршрутизаторские интерфейсы.
+Маршрутизатор участвует в динамической маршрутизации и принимает маршруты от соседних устройств.
+
+![конфигурация протокола RIP GW2](image/15.jpg){#fig-015 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    msk-qscalizaya-gw-03# configure terminal
+    msk-qscalizaya-gw-03(config)# router rip
+    msk-qscalizaya-gw-03(config-router)# version 2
+    msk-qscalizaya-gw-03(config-router)# network eth0
+    msk-qscalizaya-gw-03(config-router)# network eth1
+    msk-qscalizaya-gw-03(config-router)# network eth2
+    msk-qscalizaya-gw-03(config-router)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+
+Маршрутизатор настроен для работы с протоколом RIP версии 2, в процесс маршрутизации включены все сетевые интерфейсы.
+Это позволяет автоматически распространять и получать маршруты между всеми сегментами сети.
+
+![конфигурация протокола RIP GW3](image/16.jpg){#fig-016 width=70%}
+
+msk-qscalizaya-gw-04:
+
+    msk-qscalizaya-gw-04# configure terminal
+    msk-qscalizaya-gw-04(config)# router rip
+    msk-qscalizaya-gw-04(config-router)# version 2
+    msk-qscalizaya-gw-04(config-router)# network eth0
+    msk-qscalizaya-gw-04(config-router)# network eth1
+    msk-qscalizaya-gw-04(config-router)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+
+На маршрутизаторе включена динамическая маршрутизация IPv4 с использованием RIP v2.
+Маршрутизатор успешно обменивается маршрутной информацией с соседними узлами и участвует в построении общей таблицы маршрутизации сети.
+
+![конфигурация протокола RIP GW4](image/17.jpg){#fig-017 width=70%}
+
+Потом я убедился, что маршрутизации по rip настроены
+
+    msk-qscalizaya-gw-0x#show ip route rip
+    msk-qscalizaya-gw-0x#show ip rip
+    msk-qscalizaya-gw-0x#show ip rip status
+
+![RIP gw1](image/18.jpg){#fig-018 width=70%}
+
+![RIP gw2](image/19.jpg){#fig-019 width=70%}
+
+![RIP gw3](image/20.jpg){#fig-020 width=70%}
+
+![RIP gw4](image/21.jpg){#fig-021 width=70%}
+
+
+Дальше я пытался пропинговать PC2 с PC1
+
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+![попытка подключения](image/22.jpg){#fig-022 width=70%}
+
+и мы можем смотреть в рисунке что подключение успешно и также что наш путь пыла pc1-sw1-gw1-gw2-gw3-sw2-pc2
+
+Дальше я смотрел метрики протокола RIP
+
+![метрики протокола RIP](image/24.jpg){#fig-024 width=70%}
+
+
+потом я смотрел хват в wireShark
+
+![wireshark](image/23.jpg){#fig-023 width=70%}
+
+В захваченном трафике наблюдаются сообщения ICMP Time-to-live exceeded и повторные TCP-передачи, что указывает на временную петлю маршрутизации в процессе конвергенции протокола RIP v2. После завершения обмена маршрутной информацией связь между узлами была успешно восстановлена, что подтверждается корректными ICMP Echo request/reply.
+
+
+Дальше я пытался выключить eth0 в gw2
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# shutdown
+
+![eth0 shutdown](image/25.jpg){#fig-025 width=70%}
+
+и смотрел еще раз метрики протокола RIP
+
+    msk-qscalizaya-gw-01# show ip rip
+
+![метрики протокола RIP](image/26.jpg){#fig-026 width=70%}
+
+
+и еще раз я пропинговал pc2 c PC1
+
+
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+![попытка подключения](image/27.jpg){#fig-027 width=70%}
+
+и можем смотреть что сейчас путь другая, pc1-sw1-gw1-**gw4**-gw3-sw2-pc1 и затем я еще раз включил eth0 и пропинговал
+
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+
+    pc1:
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+![включение eth0](image/28.jpg){#fig-028 width=70%}
+
+![попытка подключения](image/29.jpg){#fig-029 width=70%}
+
+
+Дальше я настроил RIPng в маршрутизаторах для сетей IPv6
+
+msk-qscalizaya-gw-01:
+
+    msk-qscalizaya-gw-01# configure terminal
+    msk-qscalizaya-gw-01(config)# router ripng
+    msk-qscalizaya-gw-01(config-router)# network eth0
+    msk-qscalizaya-gw-01(config-router)# network eth1
+    msk-qscalizaya-gw-01(config-router)# network eth2
+    msk-qscalizaya-gw-01(config-router)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+
+![настройка RIPng в gw1](image/30.jpg){#fig-030 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# router ripng
+    msk-qscalizaya-gw-02(config-router)# network eth0
+    msk-qscalizaya-gw-02(config-router)# network eth1
+    msk-qscalizaya-gw-02(config-router)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+
+![настройка RIPng в gw2](image/31.jpg){#fig-031 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    msk-qscalizaya-gw-03# configure terminal
+    msk-qscalizaya-gw-03(config)# router ripng
+    msk-qscalizaya-gw-03(config-router)# network eth0
+    msk-qscalizaya-gw-03(config-router)# network eth1
+    msk-qscalizaya-gw-03(config-router)# network eth2
+    msk-qscalizaya-gw-03(config-router)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+
+![настройка RIPng в gw3](image/32.jpg){#fig-032 width=70%}
+
+msk-qscalizaya-gw-04:
+
+    msk-qscalizaya-gw-04# configure terminal
+    msk-qscalizaya-gw-04(config)# router ripng
+    msk-qscalizaya-gw-04(config-router)# network eth0
+    msk-qscalizaya-gw-04(config-router)# network eth1
+    msk-qscalizaya-gw-04(config-router)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+
+![настройка RIPng в gw4](image/33.jpg){#fig-033 width=70%}
+
+
+Дальше я проверил похождение пакетов
+
+    pc1:
+    ping 2001:11::a
+    trace 2001:11::a
+
+
+![проверка прохождения пакетов](image/34.jpg){#fig-034 width=70%}
+
+и мы можем смотреть что здесь еще раз пакеты проходят через gw2
+
+потом я смотрел метрики протокола RIPng в gw1
+
+    msk-qscalizaya-gw-01# show ipv6 ripng
+
+![name](image/35.jpg){#fig-035 width=70%}
+
+Дальше я еще раз выключил eth0
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# shutdown
+
+![name](image/36.jpg){#fig-036 width=70%}
+
+проверил метрики протокола RIPng
+
+    msk-qscalizaya-gw-01# show ipv6 ripng
+
+![name](image/37.jpg){#fig-037 width=70%}
+
+
+и еще раз смотрел прохождение пакетов 
+
+    pc1:
+    ping 2001:11::a
+    trace 2001:11::a
+
+![name](image/38.jpg){#fig-038 width=70%}
+
+в моем случае я заметил что такая настройка не работает
+
+Потом я еще раз включил eth0 в gw2 и смотрел прохождение пактов
+
+
+### Настройка динамической маршрутизации по протоколу OSPF
+
+Здесь я настроел протоколы OSPF в маршрутизаторах 
+
+
+msk-qscalizaya-gw-01:
+
+    msk-qscalizaya-gw-01# configure terminal
+    msk-qscalizaya-gw-01(config)# router ospf
+    msk-qscalizaya-gw-01(config-router)# network 10.0.10.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-01(config-router)# network 10.0.1.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-01(config-router)# network 10.0.4.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-01(config-router)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+
+На маршрутизаторе msk-qscalizaya-gw-01 настроен протокол динамической маршрутизации OSPF.
+В область area 0 включены локальная сеть и межмаршрутизаторские сегменты, что позволяет маршрутизатору участвовать в обмене маршрутной информацией в магистральной области.
+
+![настройка протокола OSPF в gw1](image/39.jpg){#fig-039 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# router ospf
+    msk-qscalizaya-gw-02(config-router)# network 10.0.1.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-02(config-router)# network 10.0.2.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-02(config-router)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+
+На маршрутизаторе msk-qscalizaya-gw-02 активирован протокол OSPF и добавлены сети, соединяющие его с соседними маршрутизаторами.
+Маршрутизатор участвует в магистральной области area 0 и обменивается маршрутами с соседними узлами.
+
+![настройка протокола OSPF в gw2](image/40.jpg){#fig-040 width=70%}
+
+
+msk-qscalizaya-gw-03:
+
+    msk-qscalizaya-gw-03# configure terminal
+    msk-qscalizaya-gw-03(config)# router ospf
+    msk-qscalizaya-gw-03(config-router)# network 10.0.11.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-03(config-router)# network 10.0.2.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-03(config-router)# network 10.0.3.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-03(config-router)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+
+Маршрутизатор msk-qscalizaya-gw-03 настроен для работы с протоколом OSPF.
+В конфигурацию включены как локальная сеть, так и межмаршрутизаторские сегменты, что обеспечивает корректную маршрутизацию трафика внутри области area 0.
+
+![настройка протокола OSPF в gw3](image/41.jpg){#fig-041 width=70%}
+
+msk-qscalizaya-gw-04:
+
+    msk-qscalizaya-gw-04# configure terminal
+    msk-qscalizaya-gw-04(config)# router ospf
+    msk-qscalizaya-gw-04(config-router)# network 10.0.3.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-04(config-router)# network 10.0.4.0/24 area 0.0.0.0
+    msk-qscalizaya-gw-04(config-router)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+
+На маршрутизаторе msk-qscalizaya-gw-04 выполнена настройка протокола OSPF для сетей, соединяющих его с соседними маршрутизаторами.
+Маршрутизатор успешно интегрирован в магистральную область area 0 и участвует в динамической маршрутизации сети.
+
+![настройка протокола OSPF в gw4](image/42.jpg){#fig-042 width=70%}
+
+
+Потом я пропинговал с PC1 pc2
+
+
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+![проверка подключения](image/43.jpg){#fig-043 width=70%}
+
+и там видно что путь такая: pc1-sw1-gw1-gw2-gw3-sw2-pc2
+
+Дальше я смотрел таблицу маршрутизатора протокола OSPFv2
+
+    msk-qscalizaya-gw-01# show ip ospf neighbor
+    msk-qscalizaya-gw-01# show ip ospf route
+
+![таблица маршрутизатора протокола OSPFv2](image/44.jpg){#fig-044 width=70%}
+
+Потом для проверки, я выключил eth0 в gw2
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# shutdown
+
+![eth0 shutdown](image/45.jpg){#fig-045 width=70%}
+
+проверил таблицу маршрутизатора
+
+msk-qscalizaya-gw-01# show ip ospf neighbor
+msk-qscalizaya-gw-01# show ip ospf route
+
+![таблица при eth0 shutdown](image/46.jpg){#fig-046 width=70%}
+
+
+и пропинговал с PC1 
+
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+![проверка подключения](image/47.jpg){#fig-047 width=70%}
+
+и сейчас видно что путь еще раз изменился: pc1-sw1-gw1-gw4-gw3-sw2-pc2
+
+потом я подключил eth0, проверил еще раз и смотрел wireshark
+
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+
+    pc1:
+    ping 10.0.11.10
+    trace 10.0.11.10 -P 6
+
+
+![name](image/48.jpg){#fig-048 width=70%}
+
+![name](image/49.jpg){#fig-049 width=70%}
+здесь путь не изменился потому что протокол не дашел причину чтобы изменить маршрут
+
+![name](image/50.jpg){#fig-050 width=70%}
+
+Дальше я начал настройку OSPFv3 для сетей IPv6
+
+
+msk-qscalizaya-gw-01:
+
+    msk-qscalizaya-gw-01# configure terminal
+    msk-qscalizaya-gw-01(config)# router ospf6
+    msk-qscalizaya-gw-01(config-rtr)# ospf6 router-id 1.1.1.1
+    msk-qscalizaya-gw-01(config-rtr)# exit
+    msk-qscalizaya-gw-01(config)# interface eth0
+    msk-qscalizaya-gw-01(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth1
+    msk-qscalizaya-gw-01(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# interface eth2
+    msk-qscalizaya-gw-01(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-01(config-if)# exit
+    msk-qscalizaya-gw-01(config)# exit
+    msk-qscalizaya-gw-01# write memory
+
+
+
+На маршрутизаторе msk-qscalizaya-gw-01 настроен протокол динамической маршрутизации OSPFv3 для IPv6.
+Задан уникальный идентификатор маршрутизатора, а все IPv6-интерфейсы добавлены в магистральную область area 0, что обеспечивает обмен маршрутами IPv6.
+
+![настройка OSFPV3 gw1](image/51.jpg){#fig-051 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# router ospf6
+    msk-qscalizaya-gw-02(config-rtr)# ospf6 router-id 2.2.2.2
+    msk-qscalizaya-gw-02(config-rtr)# exit
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# interface eth1
+    msk-qscalizaya-gw-02(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-02(config-if)# exit
+    msk-qscalizaya-gw-02(config)# exit
+    msk-qscalizaya-gw-02# write memory
+
+На маршрутизаторе msk-qscalizaya-gw-02 активирован протокол OSPFv3 и назначен уникальный router-id.
+Интерфейсы маршрутизатора включены в область area 0, что позволяет ему участвовать в динамической маршрутизации IPv6-сети.
+
+![настройка OSFPV3 gw2](image/52.jpg){#fig-052 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    msk-qscalizaya-gw-03# configure terminal
+    msk-qscalizaya-gw-03(config)# router ospf6
+    msk-qscalizaya-gw-03(config-rtr)# ospf6 router-id 3.3.3.3
+    msk-qscalizaya-gw-03(config-rtr)# exit
+    msk-qscalizaya-gw-03(config)# interface eth0
+    msk-qscalizaya-gw-03(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth1
+    msk-qscalizaya-gw-03(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# interface eth2
+    msk-qscalizaya-gw-03(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-03(config-if)# exit
+    msk-qscalizaya-gw-03(config)# exit
+    msk-qscalizaya-gw-03# write memory
+
+Маршрутизатор msk-qscalizaya-gw-03 настроен для работы с протоколом OSPFv3.
+Все IPv6-интерфейсы добавлены в магистральную область area 0, обеспечивая корректный обмен маршрутной информацией между сегментами IPv6-сети.
+
+![настройка OSFPV3 gw3](image/53.jpg){#fig-053 width=70%}
+
+msk-qscalizaya-gw-04:
+
+    msk-qscalizaya-gw-04# configure terminal
+    msk-qscalizaya-gw-04(config)# router ospf6
+    msk-qscalizaya-gw-04(config-rtr)# ospf6 router-id 4.4.4.4
+    msk-qscalizaya-gw-04(config-rtr)# exit
+    msk-qscalizaya-gw-04(config)# interface eth0
+    msk-qscalizaya-gw-04(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# interface eth1
+    msk-qscalizaya-gw-04(config-if)# ipv6 ospf6 area 0
+    msk-qscalizaya-gw-04(config-if)# exit
+    msk-qscalizaya-gw-04(config)# exit
+    msk-qscalizaya-gw-04# write memory
+
+На маршрутизаторе msk-qscalizaya-gw-04 выполнена настройка OSPFv3 с заданием уникального идентификатора маршрутизатора.
+Маршрутизатор подключён к магистральной области area 0 и участвует в динамической маршрутизации IPv6.
+
+![настройка OSFPV3 gw4](image/54.jpg){#fig-054 width=70%}
+
+Потом я пропинговал еще раз используя IPv6
+
+    ping 2001:11::a
+    trace 2001:11::a
+
+![ping](image/55.jpg){#fig-055 width=70%}
+
+как обычно видно что маршрут такой: pc1-gw1-gw2-gw3-pc2.
+
+потом я смотрел таблицу OSPFv3 и выключил eth0 в gw2 чтобы симулировать попадение маршрутизатора gw2  
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# shutdown
+
+
+![eth0 shutdown](image/56.jpg){#fig-056 width=70%}
+
+
+и еще раз смотрел таблицу OSPFv3
+
+    msk-qscalizaya-gw-01# show ipv6 ospf6 route
+
+![таблицa OSPFv3](image/57.jpg){#fig-057 width=70%}
+
+и еще раз пропинговал 
+
+    ping 2001:11::a
+    trace 2001:11::a
+
+![ping](image/58.jpg){#fig-058 width=70%}
+
+как надежно, маршрут изменился и сейчас он такой: pc1-gw1-gw4-gw3-pc2
+
+Дальше я включил eth0 и пропинговал еще раз и смотрел пакеты в wireshark
+
+    msk-qscalizaya-gw-02# configure terminal
+    msk-qscalizaya-gw-02(config)# interface eth0
+    msk-qscalizaya-gw-02(config-if)# no shutdown
+
+    pc1:
+    ping 2001:11::a
+    trace 2001:11::a
+
+
+![включение eth](image/59.jpg){#fig-059 width=70%}
+
+![пакеты](image/60.jpg){#fig-060 width=70%}
+
+
+## Построение туннеля IPv6–IPv4
+
+### настопология сети
+
+сначала я создал новый проект и поставил все элементы как видно в рисунке
+
+![новый проект](image/61.jpg){#fig-061 width=70%}
+
+![топология сети](image/62.jpg){#fig-062 width=70%}
+
+Потом я дал компьютерам IP-адрес 
+
+    PC1-qscalizaya:
+    ip 1000::a/64
+    save
+    show ipv6
+    PC2-qscalizaya:
+    ip 1002::a/64
+    save
+    show ipv6
+
+![ip-адрес pc1](image/63.jpg){#fig-063 width=70%}
+
+![ip-адрес pc2](image/64.jpg){#fig-064 width=70%}
+
+Потом включил маршрутизаторы vyos и начал основную настройку
+
+    vyos@vyos$ configure
+    vyos@vyos# set system host-name msk-qscalizaya-gw-0x
+    vyos@vyos# compare
+    vyos@vyos# commit
+    vyos@vyos# save
+    vyos@vyos# exit
+    vyos@vyos$ reboot
+
+![основная настройка gw1](image/65.jpg){#fig-065 width=70%}
+
+![основная настройка gw2](image/66.jpg){#fig-066 width=70%}
+
+![основная настройка gw3](image/67.jpg){#fig-067 width=70%}
+
+Потом я настроел интерфейсы 
+
+msk-qscalizaya-gw-01:
+
+    vyos@msk-qscalizaya-gw-01:~$ configure
+    vyos@msk-qscalizaya-gw-01# set interfaces ethernet eth0 address 1000::1/64
+    vyos@msk-qscalizaya-gw-01# set interfaces ethernet eth1 address 10.0.0.1/8
+    vyos@msk-qscalizaya-gw-01# set service router-advert interface eth0 prefix 1000::/64
+    vyos@msk-qscalizaya-gw-01# commit
+    vyos@msk-qscalizaya-gw-01# save
+
+
+![настройка интерфейса gw1](image/68.jpg){#fig-068 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    vyos@msk-qscalizaya-gw-02:~$ configure
+    vyos@msk-qscalizaya-gw-02# set interfaces ethernet eth0 address 1002::1/64
+    vyos@msk-qscalizaya-gw-02# set interfaces ethernet eth1 address 20.0.0.2/8
+    vyos@msk-qscalizaya-gw-02# set service router-advert interface eth0 prefix 1002::/64
+    vyos@msk-qscalizaya-gw-02# commit
+    vyos@msk-qscalizaya-gw-02# save
+
+![настройка интерфейса gw2](image/69.jpg){#fig-069 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    vyos@msk-qscalizaya-gw-03:~$ configure
+    vyos@msk-qscalizaya-gw-03# set interfaces ethernet eth0 address10.0.0.2/8
+    vyos@msk-qscalizaya-gw-03# set interfaces ethernet eth1 address20.0.0.1/8
+    vyos@msk-qscalizaya-gw-03# commit
+    vyos@msk-qscalizaya-gw-03# save
+
+![настройка интерфейса gw3](image/70.jpg){#fig-070 width=70%}
+
+потом я убедился что на pc появились адреса ближайших к ним маршрутизаторов
+
+    show ipv6
+
+![проверка адресов PC1](image/71.jpg){#fig-071 width=70%}
+
+![проверка адресов PC2](image/72.jpg){#fig-072 width=70%}
+
+и проверил маршруты с маршрутизатора gw1
+
+    vyos@msk-qscalizaya-gw-01:~$ ping 10.0.0.2
+    vyos@msk-qscalizaya-gw-01:~$ ping 20.0.0.1
+    vyos@msk-qscalizaya-gw-01:~$ ping 20.0.0.2
+
+![проверка маршрутов](image/73.jpg){#fig-073 width=70%}
+
+
+Дальше я настроел маршрутизацию IPv4
+
+msk-qscalizaya-gw-01:
+
+    vyos@msk-qscalizaya-gw-01:~$ configure
+    vyos@msk-qscalizaya-gw-01# set protocols rip network 10.0.0.0/8
+    vyos@msk-qscalizaya-gw-01# commit
+    vyos@msk-qscalizaya-gw-01# save
+
+![настройка маршрутизации IPv4 gw1](image/74.jpg){#fig-074 width=70%}
+
+msk-qscalizaya-gw-02:
+
+    vyos@msk-qscalizaya-gw-02:~$ configure
+    vyos@msk-qscalizaya-gw-02# set protocols rip network 20.0.0.0/8
+    vyos@msk-qscalizaya-gw-02# commit
+    vyos@msk-qscalizaya-gw-02# save
+
+![настройка маршрутизации IPv4 gw2](image/75.jpg){#fig-075 width=70%}
+
+msk-qscalizaya-gw-03:
+
+    vyos@msk-qscalizaya-gw-03:~$ configure
+    vyos@msk-qscalizaya-gw-03# set protocols rip network 10.0.0.0/8
+    vyos@msk-qscalizaya-gw-03# set protocols rip network 20.0.0.0/8
+    vyos@msk-qscalizaya-gw-03# commit
+    vyos@msk-qscalizaya-gw-03# save
+
+![настройка маршрутизации IPv4 gw3](image/76.jpg){#fig-076 width=70%}
+
+Затем я проверял с gw1
+
+    vyos@msk-qscalizaya-gw-01:~$ ping 10.0.0.2
+    vyos@msk-qscalizaya-gw-01:~$ ping 20.0.0.1
+    vyos@msk-qscalizaya-gw-01:~$ ping 20.0.0.2
+
+![проверка](image/77.jpg){#fig-077 width=70%}
+
+Дальше я начал настроеть туннель IPv6
+
+msk-qscalizaya-gw-01:
+
+    vyos@msk-qscalizaya-gw-01:~$ configure
+    vyos@msk-qscalizaya-gw-01# set interfaces tunnel tun0 encapsulation sit
+    vyos@msk-qscalizaya-gw-01# set interfaces tunnel tun0 source-address 10.0.0.1
+    vyos@msk-qscalizaya-gw-01# set interfaces tunnel tun0 remote 20.0.0.2
+    vyos@msk-qscalizaya-gw-01# set interfaces tunnel tun0 address 1001::1/64
+    vyos@msk-qscalizaya-gw-01# commit
+    vyos@msk-qscalizaya-gw-01# save
+
+![настройка туннеля IPv6 gw1](image/78.jpg){#fig-078 width=70%}
+
+
+msk-qscalizaya-gw-02:
+
+    vyos@msk-qscalizaya-gw-02:~$ configure
+    vyos@msk-qscalizaya-gw-02# set interfaces tunnel tun0 encapsulation sit
+    vyos@msk-qscalizaya-gw-02# set interfaces tunnel tun0 ource-address 20.0.0.2
+    vyos@msk-qscalizaya-gw-02# set interfaces tunnel tun0 remote 10.0.0.1
+    vyos@msk-qscalizaya-gw-02# set interfaces tunnel tun0 address 1001::2/64
+    vyos@msk-qscalizaya-gw-02# commit
+    vyos@msk-qscalizaya-gw-02# save
+
+![настройка туннеля IPv6 gw2](image/79.jpg){#fig-079 width=70%}
+
+Потом я настроел статическую маршрутизацию IPv6
+
+msk-user-gw-01:
+
+    vyos@msk-user-gw-01:~$ configure
+    vyos@msk-user-gw-01# set protocols static route6 1002::0/64 next-hop 1001::2
+    vyos@msk-user-gw-01# commit
+    vyos@msk-user-gw-01# save
+
+![статическая маршрутизация IPv6 PC1](image/80.jpg){#fig-080 width=70%}
+
+msk-user-gw-02:
+
+    vyos@msk-user-gw-02:~$ configure
+    vyos@msk-user-gw-02# set protocols static route6 1000::0/64 next-hop 1001::1
+    vyos@msk-user-gw-02# commit
+    vyos@msk-user-gw-02# save
+
+![статическая маршрутизация IPv6 PC2](image/81.jpg){#fig-081 width=70%}
+
+и проверил что есть соединение между компьютерами
+
+    PC1-user:
+    PC1-user> ping 1002::a
+    PC1-user> trace 1002::a
+
+    PC2-user:
+    PC2-user> ping 1000::a
+    PC2-user> trace 1000::a
+
+![проверка ping PC1](image/82.jpg){#fig-082 width=70%}
+
+![проверка ping PC2](image/83.jpg){#fig-083 width=70%}
+
+
+# Выводы
+
+в этой лабораторной работе я смог смотреть как настроеть динамическую маршрутизацию используя протоколы RIP(ipv4), RIPng(ipv6), OSPFv2(ipv4) и OSPFv3(ipv6). также я смог смотреть как эти протоколы работают под протоклом туннеля IPv6 через IPv4
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

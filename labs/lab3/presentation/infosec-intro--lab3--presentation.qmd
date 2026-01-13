@@ -1,0 +1,118 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412@pfur.ru
+
+## Title
+title: презентация лабораторной работе №3
+subtitle: Анализ трафика в Wireshark
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD" # Example: 2025-09-06
+---
+
+# MAC-адресация
+
+## ipconfig
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+ipconfig /all
+
+:::
+::: {.column width="60%"}
+
+![](./image/02.jpg)
+
+:::
+::::::::::::::
+
+
+
+# Анализ кадров канального уровня в Wireshark
+
+## wireshark
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/03.jpg)
+
+:::
+::::::::::::::
+
+## ping
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+ping 192.168.0.1
+
+:::
+::: {.column width="60%"}
+
+![](./image/04.jpg)
+
+:::
+::::::::::::::
+
+
+## фильтры
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+ICMP or arp
+
+:::
+::: {.column width="60%"}
+
+![](./image/05.jpg)
+
+:::
+::::::::::::::
+
+
+
+# Анализ протоколов транспортного уровня в Wireshark
+
+## Докладчик
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+http, dns и quic
+
+:::
+::: {.column width="60%"}
+
+![](./image/10.jpg)
+
+:::
+::::::::::::::
+
+
+
+
+
+# Анализ handshake протокола TCP в Wireshark
+
+## Докладчик
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+telnet google.com 80
+tcp
+
+
+:::
+::: {.column width="60%"}
+
+![](./image/12.jpg)
+
+:::
+::::::::::::::

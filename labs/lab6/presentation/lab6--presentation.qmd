@@ -1,0 +1,357 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412@pfur.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: презентация №6
+subtitle: Адресация IPv4 и IPv6. Двойной стек
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD" # Example: 2025-09-06
+---
+
+
+
+# Разбиение сети на подсети
+
+## топология
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/06.png)
+
+:::
+::::::::::::::
+
+## таблица адресации
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/38.png)
+
+:::
+::::::::::::::
+
+
+## настройка компьютер 1
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+  * ip 172.16.20.10/25 172.16.20.1
+  * save
+
+:::
+::: {.column width="60%"}
+
+![](./image/07.png)
+
+:::
+::::::::::::::
+
+
+## настройка компьютер 2
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+  * ip 172.16.20.138/25 172.16.20.129
+  * save
+
+:::
+::: {.column width="60%"}
+
+![](./image/08.png)
+
+:::
+::::::::::::::
+
+
+## настройка сервера
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+  * ip 64.100.1.10/24 64.100.1.1
+  * save
+
+:::
+::: {.column width="60%"}
+
+![](./image/09.png)
+
+:::
+::::::::::::::
+
+## настройка FFR
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/15.png)
+
+:::
+::::::::::::::
+
+
+## проверка соединения
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/16.png)
+
+:::
+::::::::::::::
+
+
+## пакеты
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/18.png)
+
+:::
+::::::::::::::
+
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/19.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/20.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/21.png)
+
+:::
+::::::::::::::
+
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/22.png)
+
+:::
+::::::::::::::
+
+
+## настройка PC3
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+  * ip 2001:db8:c0de:12::a/64
+      save
+      show ipv6
+
+:::
+::: {.column width="60%"}
+
+![](./image/10.png)
+
+:::
+::::::::::::::
+
+## настройка PC4
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+  * ip 2001:db8:c0de:13::a/64
+    save
+    show ipv6
+
+:::
+::: {.column width="60%"}
+
+![](./image/11.png)
+
+:::
+::::::::::::::
+
+## настройка сервера
+
+:::::::::::::: {.columns align=center}
+::: {.column width="40%"}
+
+    * ip 2001:db8:c0de:11:a/64
+      save
+      show ipv6`
+
+:::
+::: {.column width="60%"}
+
+![](./image/12.png)
+
+:::
+::::::::::::::
+
+## проверка
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/25.png)
+
+:::
+::::::::::::::
+
+## пакеты
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/26.png)
+
+:::
+::::::::::::::
+
+# мой топологии
+
+## таблица адресов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/39.png)
+
+:::
+::::::::::::::
+
+
+## топология
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/27.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/27.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/28.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/29.png)
+
+:::
+::::::::::::::
+
+## настройка vyos
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/31.png)
+
+:::
+::::::::::::::
+
+
+## настройка компьютер 1
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/35.png)
+
+:::
+::::::::::::::
+
+## настройка компьютер 2
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/35.png)
+
+:::
+::::::::::::::
+
+
+## Проверка соединения
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="60%"}
+
+![](./image/37.png)
+
+:::
+::::::::::::::
+
+
+# спасибо за внимание

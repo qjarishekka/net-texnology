@@ -1,0 +1,952 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412@pfur.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: презентация Лабораторной работы № 8
+subtitle: Адресация IPv4 и IPv6. Настройка маршрутизации
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD" # Example: 2025-09-06
+---
+
+# Цель работы
+
+## Цель работы
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+  * Изучение принципов маршрутизации в IPv4- и IPv6-сетях принципов настройки сетевого оборудования.
+
+:::
+
+::::::::::::::
+
+
+# Настройка динамической маршрутизации в сетях IPv4
+
+## топология
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/01.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка ip-адресы ipv4
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+  * ip 10.0.10.10/24 10.0.10.1
+
+:::
+::: {.column width="30%"}
+
+![](./image/02.jpg)
+
+:::
+::::::::::::::
+
+## настройка ip-адресы ipv4
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+  * ip 10.0.11.10/24 10.0.11.1
+
+:::
+::: {.column width="30%"}
+
+![](./image/03.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизаторов ipv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="30%"}
+
+![](./image/04.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизаторов ipv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/05.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизаторов ipv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/06.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизаторов ipv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/07.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка ip-адресы ipv6 компьютеров
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * ip 2001:10::a/64
+
+:::
+::: {.column width="70%"}
+
+![](./image/08.jpg)
+
+:::
+::::::::::::::
+
+## настройка ip-адресы ipv6 компьютеров
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * ip 2001:11::a/64
+
+:::
+::: {.column width="70%"}
+
+![](./image/09.jpg)
+
+:::
+::::::::::::::
+
+
+
+## настройка маршрутизаторова ipv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/10.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизаторова ipv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/11.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка маршрутизаторова ipv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/12.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка маршрутизаторова ipv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="100%"}
+
+![](./image/13.jpg)
+
+:::
+::::::::::::::
+
+
+
+## Настройка динамической маршрутизации по протоколу RIP 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/14.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу RIP 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/15.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу RIP 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/16.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу RIP 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/17.jpg)
+
+:::
+::::::::::::::
+
+
+## Проверка настройки маршрутизации по RIP 
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  - msk-user-gw-0x#show ip route rip
+  - msk-user-gw-0x#show ip rip
+  - msk-user-gw-0x#show ip rip status
+
+:::
+::: {.column width="70%"}
+
+![](./image/18.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути прохождения пакетов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/22.jpg)
+
+:::
+::::::::::::::
+
+
+## выключение eth0 
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/25.jpg)
+
+:::
+::::::::::::::
+
+
+## проверка пути прохождения пакетов при выключении eth в маршрутизаторе gw2
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/27.jpg)
+
+:::
+::::::::::::::
+
+
+## включение eth0 
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * no shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/28.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути прохождения пакетов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/29.jpg)
+
+:::
+::::::::::::::
+
+
+
+## настройка маршрутизации RIPng для сетей IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/30.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизации RIPng для сетей IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/31.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизации RIPng для сетей IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/32.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизации RIPng для сетей IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/33.jpg)
+
+:::
+::::::::::::::
+
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  - ping 2001:11::a
+  - trace 2001:11::a
+
+:::
+::: {.column width="70%"}
+
+![](./image/34.jpg)
+
+:::
+::::::::::::::
+
+## метрики протокола RIPng
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  - show ipv6 ripng
+
+:::
+::: {.column width="70%"}
+
+![](./image/35.jpg)
+
+:::
+::::::::::::::
+
+## выключение eth0
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+  * shutdown
+
+:::
+::: {.column width="30%"}
+
+![](./image/36.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  - ping 2001:11::a
+  - trace 2001:11::a
+
+:::
+::: {.column width="70%"}
+
+![](./image/38.jpg)
+
+:::
+::::::::::::::
+
+
+
+
+## Настройка динамической маршрутизации по протоколу OSPF ipv4.
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/39.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу OSPF ipv4.
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/40.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу OSPF ipv4.
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/41.jpg)
+
+:::
+::::::::::::::
+
+## Настройка динамической маршрутизации по протоколу OSPF ipv4.
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/42.jpg)
+
+:::
+::::::::::::::
+
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- 10.0.11.10
+- trace 10.0.11.10 -P 6
+
+:::
+::: {.column width="70%"}
+
+![](./image/43.jpg)
+
+:::
+::::::::::::::
+
+
+## таблица маршрутизации протокола OPSF
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- show ip ospf neighbor
+- show ip ospf route
+
+
+:::
+::: {.column width="70%"}
+
+![](./image/44.jpg)
+
+:::
+::::::::::::::
+
+## выключение eth0
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/45.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- 10.0.11.10
+- trace 10.0.11.10 -P 6
+
+:::
+::: {.column width="70%"}
+
+![](./image/47.jpg)
+
+:::
+::::::::::::::
+
+## включение eth0
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+  * no shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/48.jpg)
+
+:::
+::::::::::::::
+
+## настройка протокола OSFPv3
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/51.jpg)
+
+:::
+::::::::::::::
+
+## настройка протокола OSFPv3
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/52.jpg)
+
+:::
+::::::::::::::
+
+## настройка протокола OSFPv3
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/53.jpg)
+
+:::
+::::::::::::::
+
+## настройка протокола OSFPv3
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/54.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- ping 2001:11::a
+- trace 2001:11::a
+
+:::
+::: {.column width="70%"}
+
+![](./image/55.jpg)
+
+:::
+::::::::::::::
+
+## таблица маршрутизации
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- show ipv6 ospf6 route
+
+:::
+::: {.column width="70%"}
+
+![](./image/57.jpg)
+
+:::
+::::::::::::::
+
+
+## выключение eth0
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/56.jpg)
+
+:::
+::::::::::::::
+
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- ping 2001:11::a
+- trace 2001:11::a
+
+:::
+::: {.column width="70%"}
+
+![](./image/58.jpg)
+
+:::
+::::::::::::::
+
+## включение eth0
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- no shutdown
+
+:::
+::: {.column width="70%"}
+
+![](./image/59.jpg)
+
+:::
+::::::::::::::
+
+
+# Построение туннеля IPv6–IPv4
+
+## топология сети
+
+:::::::::::::: {.columns align=center}
+::: {.column width="70%"}
+
+![](./image/62.jpg)
+
+:::
+::::::::::::::
+
+## ip-адрес PC1
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- 1000::a/64
+
+:::
+::: {.column width="70%"}
+
+![](./image/63.jpg)
+
+:::
+::::::::::::::
+
+
+## ip-адрес PC2
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- ip 1002::a/64
+
+:::
+::: {.column width="70%"}
+
+![](./image/64.jpg)
+
+:::
+::::::::::::::
+
+## насьройка gw1
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/65.jpg)
+
+:::
+::::::::::::::
+
+## насьройка gw2
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/66.jpg)
+
+:::
+::::::::::::::
+
+## насьройка gw3
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/67.jpg)
+
+:::
+::::::::::::::
+
+
+## насьройка адресов на интерфейсах маршрутизаторов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/68.jpg)
+
+:::
+::::::::::::::
+
+## насьройка адресов на интерфейсах маршрутизаторов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/69.jpg)
+
+:::
+::::::::::::::
+
+## насьройка адресов на интерфейсах маршрутизаторов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/70.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- ping 10.0.0.2
+- ping 20.0.0.1
+- ping 20.0.0.2
+
+:::
+::: {.column width="70%"}
+
+![](./image/73.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка маршрутизации IPv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/74.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизации IPv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/75.jpg)
+
+:::
+::::::::::::::
+
+## настройка маршрутизации IPv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/76.jpg)
+
+:::
+::::::::::::::
+
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+- ping 10.0.0.2
+- ping 20.0.0.1
+- ping 20.0.0.2
+
+:::
+::: {.column width="70%"}
+
+![](./image/77.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка туннеля IPv6 через IPv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/78.jpg)
+
+:::
+::::::::::::::
+
+## настройка туннеля IPv6 через IPv4
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/79.jpg)
+
+:::
+::::::::::::::
+
+
+## настройка статической маршрутизации IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/80.jpg)
+
+:::
+::::::::::::::
+
+## настройка статической маршрутизации IPv6
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/81.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+PC1-user:
+- ping 1002::a
+- trace 1002::a
+
+
+
+:::
+::: {.column width="70%"}
+
+![](./image/82.jpg)
+
+:::
+::::::::::::::
+
+## проверка пути пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="30%"}
+
+PC2-user:
+- ping 1000::a
+- trace 1000::a
+
+:::
+::: {.column width="70%"}
+
+![](./image/83.jpg)
+
+:::
+::::::::::::::
+
