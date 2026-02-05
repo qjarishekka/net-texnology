@@ -1,0 +1,585 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая арсе
+  email: 1032234412
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: презентация Лабораторной работы № 1
+subtitle: Простейший вариант
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD" # Example: 2025-09-06
+---
+
+
+
+# выполнение лабораторной работы
+
+##  Построение графиков в Octave
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/01.jpg)
+
+:::
+::::::::::::::
+
+
+##  cсоздание файлов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/02.jpg)
+
+:::
+::::::::::::::
+
+## переименование
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/03.jpg)
+
+:::
+::::::::::::::
+
+
+## код для построения графики сенуса
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/04.jpg)
+
+:::
+::::::::::::::
+
+## графика синуса
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/05.jpg)
+
+:::
+::::::::::::::
+
+
+## код для построения графики косинуса
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/06.jpg)
+
+:::
+::::::::::::::
+
+## графика косинуса
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/07.jpg)
+
+:::
+::::::::::::::
+
+## новый код для Разложения импульсного сигнала в частичный ряд Фурье
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/08.jpg)
+
+:::
+::::::::::::::
+
+## графика импульсного сигнала в частичный ряд Фурье
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/09.jpg)
+
+:::
+::::::::::::::
+
+
+## код для построения spectre
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/10.jpg)
+:::
+::::::::::::::
+
+
+## графика кода spectre (signal)
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/11.jpg)
+:::
+::::::::::::::
+
+## код для поиска спектров сигналов
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/12.jpg)
+:::
+::::::::::::::
+
+
+## графика спектров сигналов
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/13.jpg)
+:::
+::::::::::::::
+
+
+
+
+
+## код для fixed spectre
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/14.jpg)
+:::
+::::::::::::::
+
+
+## fixed spectre
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/15.jpg)
+:::
+::::::::::::::
+
+## fixed spectre
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/15.jpg)
+:::
+::::::::::::::
+
+
+## создание нового рабочего каталога в octave
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/16.jpg)
+:::
+::::::::::::::
+
+
+## создание нового файла 
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/17.jpg)
+:::
+::::::::::::::
+
+
+## код для поиска спектра суммы рассмотренных сигналов
+
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/18.jpg)
+:::
+::::::::::::::
+
+## сигнал
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/19.jpg)
+:::
+::::::::::::::
+
+
+
+## spectre
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/20.jpg)
+:::
+::::::::::::::
+
+## код фалйа am.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/21.jpg)
+:::
+::::::::::::::
+
+
+## результат кода файла am.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/22.jpg)
+:::
+::::::::::::::
+
+
+## результат кода файла am.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/23.jpg)
+:::
+::::::::::::::
+
+
+## проверка установленных пакетов
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/24.jpg)
+:::
+::::::::::::::
+
+
+## main.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/25.jpg)
+
+:::
+::::::::::::::
+
+
+## maptowave.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/26.jpg)
+
+:::
+::::::::::::::
+
+## unipolar.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/27.jpg)
+
+:::
+::::::::::::::
+
+
+## ami.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/28.jpg)
+
+:::
+::::::::::::::
+
+## bipolarnrz.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/29.jpg)
+
+:::
+::::::::::::::
+
+## bipolarrrz.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/30.jpg)
+
+:::
+::::::::::::::
+
+## manchester.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/31.jpg)
+
+:::
+::::::::::::::
+
+
+## diffnano.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/32.jpg)
+
+:::
+::::::::::::::
+
+## calcspectre.m
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/33.jpg)
+
+:::
+::::::::::::::
+
+################################################################
+
+
+## unipolar
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/34.jpg)
+
+:::
+::::::::::::::
+
+
+## ami
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/35.jpg)
+
+:::
+::::::::::::::
+
+
+## Bipolar non-return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/36.jpg)
+
+:::
+::::::::::::::
+
+
+
+## bipolar return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/37.jpg)
+
+:::
+::::::::::::::
+
+
+## manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/38.jpg)
+
+:::
+::::::::::::::
+
+
+
+## differential manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/39.jpg)
+
+:::
+::::::::::::::
+
+
+## Unipolar
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/40.jpg)
+
+:::
+::::::::::::::
+
+
+## AMI
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/41.jpg)
+
+:::
+::::::::::::::
+
+
+## bipolar non-return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/42.jpg)
+
+:::
+::::::::::::::
+
+
+## bipolar return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/43.jpg)
+
+:::
+::::::::::::::
+
+
+##  manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/44.jpg)
+
+:::
+::::::::::::::
+
+
+## Differential manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/46.jpg)
+
+:::
+::::::::::::::
+
+
+## Unipolar
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/47.jpg)
+
+:::
+::::::::::::::
+
+
+## Ami
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/48.jpg)
+
+:::
+::::::::::::::
+
+## Bipolar non-return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/49.jpg)
+
+:::
+::::::::::::::
+
+## Bipolar return to zero
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/50.jpg)
+
+:::
+::::::::::::::
+
+## manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/51.jpg)
+
+:::
+::::::::::::::
+
+## differential manchester
+
+:::::::::::::: {.columns align=center}
+::: {.column width="100%"}
+
+![](./image/52.jpg)
+
+:::
+::::::::::::::
+
+
+
+## спасибо за внимание
+
+

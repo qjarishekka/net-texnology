@@ -1,0 +1,278 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+
+## Title
+title: "отчёт по лабораторной работе №7"
+subtitle: "Адресация IPv4 и IPv6. Настройка DHCP"
+license: "CC BY"
+---
+
+# Цель работы
+
+Получение навыков настройки службы DHCP на сетевом оборудовании для
+распределения адресов IPv4 и IPv6.
+
+# Задание
+
+## Настройка DHCP в случае IPv4
+
+Задана топология сети (рис. @fig-101) и сведения по адресному пространству сети
+(табл. @fig-102).
+
+![топология 1](image/topologia1.png){#fig-101 width=70%}
+
+![таблица адресации](image/tabla1.png){#fig-102 width=70%}
+
+Требуется настроить на маршрутизаторе, имеющим адрес 10.0.0.1, DHCPсервис по распределению IPv4-адресов из диапазона 10.0.0.2 – 10.0.0.253, настроить получение адреса по DHCP на узле (PC), а также исследовать пакеты
+DHCP.
+
+## Настройка DHCP в случае IPv6
+
+Задана топология сети (рис. 7.2) и сведения по адресному пространству (табл. 7.2)
+
+![топология 2](image/topologia2.png){#fig-101 width=70%}
+
+![таблица адресации](image/tabla2.png){#fig-102 width=70%}
+
+
+# Выполнение лабораторной работы
+
+Сначала я создал новый проект в GNS3, который назвал lab7
+
+![создание проекта](image/01.jpg){#fig-001 width=70%}
+
+Потом я поставил в рабочий столь один VPC, один swithc и один gateway, как указано в задании, потом я соединил их и переименовал их как видно в рисунке @fig-002
+
+![топология](image/02.jpg){#fig-002 width=70%}
+
+Потом я запустил gateway vyos, в моем случае не надо было установливать image потому что я использовал universal image и в него уже устанавлен image @fig-003
+
+![vyos](image/03.jpg){#fig-003 width=70%}
+
+
+Дальше я настроил vyos как указано в инструкции. сначала я изменил название в терминале, потом я настроил domain name и также я создал новый пользователя qscalizaya с паролем 123456 потом сохранил и вышел два раза чтобы еще раз входить но черезс нового пользователя и удалил пользователя по умольчаниью vyos(рисунки @fig-004, @fig-005 и @fig-006)
+
+
+    vyos@vyos$ configure
+    vyos@vyos# set system host-name qscalizaya-gw-01
+    vyos@vyos# set system domain-name qscalizaya.net
+    vyos@vyos# set system login user qscalizaya authentication plaintext-password 123456
+    vyos@vyos# commit
+    vyos@vyos# save
+    vyos@vyos# exit
+    vyos@vyos$ exit
+    qscalizaya-gw-01 login: qscalizaya
+    Password: 123456
+    qscalizaya@qscalizaya-gw-01:~$ configure
+    *qscalizaya@qscalizaya-gw-01#* delete system login user vyos
+    *qscalizaya@qscalizaya-gw-01#* commit
+    *qscalizaya@qscalizaya-gw-01#* save
+
+
+![настройка](image/04.jpg){#fig-004 width=70%}
+
+![вход через нового пользователя ](image/05.jpg){#fig-005 width=70%}
+
+![удаление пользователя vyos](image/06.jpg){#fig-006 width=70%}
+
+
+дальше я создал новый интерфейс eth0 и я добавил следующую конфигурацию на него
+
+
+    *qscalizaya@qscalizaya-gw-01#* set interfaces ethernet eth0 address 10.0.0.1/24 //создание интерфейса
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcp-server shared-network-name qscalizaya domain-name qscalizaya.net //Устанавливает доменное имя (domain name) для клиентов DHCP.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcp-server shared-network-name qscalizaya name-server 10.0.0.1 // Задаёт DNS-сервер для клиентов DHCP.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcp-server shared-network-name qscalizaya subnet 10.0.0.0/24 default-router 10.0.0.1 //Указывает шлюз по умолчанию (default gateway) для подсети. 
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcp-server shared-network-name qscalizaya subnet 10.0.0.0/24 range hosts start 10.0.0.2 //Начальный IP-адрес пула выдачи DHCP.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcp-server shared-network-name qscalizaya subnet 10.0.0.0/24 range hosts stop 10.0.0.253 //Конечный IP-адрес пула DHCP.
+
+    *qscalizaya@qscalizaya-gw-01#* commit
+    *qscalizaya@qscalizaya-gw-01#* save
+    *qscalizaya@qscalizaya-gw-01#* exit
+    //сохранить и выходить
+
+
+
+![настройка интерфейса eth0](image/07.jpg){#fig-007 width=70%}
+
+![настройка интерфейса eth0](image/08.jpg){#fig-008 width=70%}
+
+
+Потом я смотретл статистики dhcp-сервера 
+
+qscalizaya@qscalizaya-gw-01$ show dhcp server statistics
+qscalizaya@qscalizaya-gw-01$ show dhcp server leases
+
+![началаные статистики](image/09.jpg){#fig-009 width=70%}
+
+мы можем смотреть что статистики пустые, потому что еще ни одного компьютера соединился. чтобы проверать работаспособность системы я открыл терминал VPC1 и там я выполнил команду ip dhcp чтобы настройть его
+
+    
+    PC1-qscalizaya> ip dhcp -d
+    PC1-qscalizaya> save
+    
+![настройка ipv4 в VPC1](image/10.jpg){#fig-010 width=70%}
+
+![настройка ipv4 в VPC1](image/11.jpg){#fig-011 width=70%}
+
+Потом я проверил настройка ipv4 в компьютере VPC1 и проверил соединение
+
+
+    PC1-qscalizaya> show ip
+    PC1-qscalizaya> ping 10.0.0.1 -c 2
+
+
+![show ip](image/12.jpg){#fig-012 width=70%}
+
+![проверка работы](image/13.jpg){#fig-013 width=70%}
+
+
+Потом я вернулся в vyos и там еще раз смотрел статистики и смотрел что там появился новый узел и его данные
+
+![статистики](image/14.jpg){#fig-014 width=70%}
+
+
+потом я создал новый проект и там поставил все узлы как выдно в рис. @fig-015. там есть 3 компьютера(1 обычный и 2 alpine linux), 3 switches и один gateway vyos
+
+![топология 2](image/15.jpg){#fig-015 width=70%}
+
+
+Здесь я сначала настроил vyos как видно раньше и потом начал следовать инструкции. сначала создал eth1 и eth2 
+
+
+    qscalizaya@qscalizaya-gw-01:~$ configure
+    *qscalizaya@qscalizaya-gw-01#* set interfaces ethernet eth1 address 2000::1/64
+    *qscalizaya@qscalizaya-gw-01#* set interfaces ethernet eth2 address 2001::1/64
+    *qscalizaya@qscalizaya-gw-01#* show interfaces
+    *qscalizaya@qscalizaya-gw-01#* commit
+    *qscalizaya@qscalizaya-gw-01#* save
+
+
+![создание интерфейсов](image/16.jpg){#fig-016 width=70%}
+
+![создание интерфейсов](image/17.jpg){#fig-017 width=70%}
+
+
+потом на маршрутизаторе настроил DHCPv6 без отслеживания состояния
+
+
+    *qscalizaya@qscalizaya-gw-01#* set service router-advert interface eth1 prefix 2000::/64 // Включает Router Advertisement (RA) на eth1 и объявляет префикс 2000::/64 для SLAAC.
+    *qscalizaya@qscalizaya-gw-01#* set service router-advert interface eth1 other-config-flag // Устанавливает флаг O (Other Config), клиенты получают доп. параметры через DHCPv6
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateless //Создаёт сеть DHCPv6 с именем qscalizaya-stateless.
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateless subnet 2000::0/64 // Определяет подсеть IPv6 для обслуживания DHCPv6.
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateless common-options name-server 2000::1 // Назначает DNS-сервер для клиентов DHCPv6.
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateless common-options domain-search qscalizaya.net //Устанавливает домен поиска (DNS suffix) для клиентов
+    *qscalizaya@qscalizaya-gw-01#* commit
+    *qscalizaya@qscalizaya-gw-01#* save
+    *qscalizaya@qscalizaya-gw-01#* run show configuration
+
+
+
+
+![настройка DHCPv6 без отслеживания](image/18.jpg){#fig-018 width=70%}
+
+![настройка DHCPv6 без отслеживания](image/19.jpg){#fig-019 width=70%}
+
+![настройка DHCPv6 без отслеживания](image/20.jpg){#fig-020 width=70%}
+
+Потом в VPC2 начал проверка, сначала смотрел ip адрес, потом ipvc6? дальше я проверил работаспособность и смотрел resolv.conf чтобы проверать его созтояние предже тем как я начал процесс dhcpv6, потом я выполнил команду udhcpc6 чтобы получить адрес по dhcpv6 и еще раз смотрел файл resolv.conf чтобы смотреть как его работает. в моем случае из-за версии alpine linux это не работал и не смог получить ничего
+
+
+
+root@PC2-qscalizaya:/# ip address
+root@PC2-qscalizaya:/# ip -6 route show
+root@PC2-qscalizaya:/# ping 2000::1 -c 2
+root@PC2-qscalizaya:/# cat /etc/resolv.conf
+root@PC2-qscalizaya:/# udhcpc6 -i eth0
+root@PC2-qscalizaya:/# ping 2000::1 -c2
+root@PC2-qscalizaya:/# cat /etc/resolv.conf
+
+
+![проверка в VPC2](image/21.jpg){#fig-021 width=70%}
+
+![проверка в VPC2](image/22.jpg){#fig-022 width=70%}
+
+![проверка в VPC2](image/23.jpg){#fig-023 width=70%}
+
+![проверка в VPC2](image/24.jpg){#fig-024 width=70%}
+
+
+Дальше я начал настройку DHCPv6 с отслеживанием состояния (DHCPv6
+Stateful configuration)
+
+
+    *qscalizaya@qscalizaya-gw-01#* set service router-advert interface eth2 managed-flag //Устанавливает флаг M (Managed), клиенты получают IPv6-адрес через DHCPv6 (stateful).
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateful //Создаёт DHCPv6-сеть с именем qscalizaya-stateful.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateful subnet 2001::0/64 //Задаёт обслуживаемую IPv6-подсеть.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateful subnet 2001::0/64 name-server 2001::1 //Назначает DNS-сервер для клиентов.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateful subnet 2001::0/64 domain-search qscalizaya.net //Указывает домен поиска DNS.
+
+    *qscalizaya@qscalizaya-gw-01#* set service dhcpv6-server shared-network-name qscalizaya-stateful subnet 2001::0/64 address-range start 2001::100 stop 2001::199 //Определяет пул выдачи IPv6-адресов (от 2001::100 до 2001::199).
+
+    *qscalizaya@qscalizaya-gw-01#* commit
+
+    *qscalizaya@qscalizaya-gw-01#* save
+
+
+![настройка DHCPv6 с отслеживанием состояния](image/25.jpg){#fig-025 width=70%}
+
+![настройка DHCPv6 с отслеживанием состояния](image/26.jpg){#fig-026 width=70%}
+
+Потом я еще раз смотрел статистики для протокола
+
+
+    *qscalizaya@qscalizaya-gw-01#* run show dhcpv6 server leases
+
+
+![статистики](image/27.jpg){#fig-027 width=70%}
+
+
+потом я еще раз проверил работаспособность в VPC3 а здесь правильно работал. я выполнил команды и в файле resolv.conf появился строка nameserver=2001:0000:0000:0000:0000:0000:0000:0001
+
+
+    root@PC3-qscalizaya:/# ip address
+    root@PC3-qscalizaya:/# ip -6 route show
+    root@PC3-qscalizaya:/# cat /etc/resolv.conf
+    root@PC3-qscalizaya:/# udhcpc6 -i eth0
+    root@PC3-qscalizaya:/# ip address
+    root@PC3-qscalizaya:/# ip -6 route show
+    root@PC3-qscalizaya:/# ping 2001::1 -c 2
+    root@PC3-qscalizaya:/# cat /etc/resolv.conf
+
+
+![проверка работаспособности DHCPv6 с отслеживанием состояния](image/30.jpg){#fig-030 width=70%}
+
+
+и в конце концов я смотрел статистики и там появился vpc3 
+
+    *qscalizaya@qscalizaya-gw-01#* run show dhcpv6 server leases
+
+![статистики](image/31.jpg){#fig-031 width=70%}
+
+
+# Выводы
+
+В этой лаборатоной работе я смог смотреть как работает dhcp и как настроить его для IPv4 и IPv6
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::

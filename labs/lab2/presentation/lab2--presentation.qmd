@@ -1,0 +1,191 @@
+---
+## Author
+author:
+  name: Кхари Жекка Кализая Арсе
+  email: 1032234412@pfur.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: Лабораторная работа № 2. Расчёт сети Fast Ethernet
+subtitle: Простейший вариант
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD" # Example: 2025-09-06
+---
+
+
+
+
+# выполнение лабораторной работы
+
+## варианты 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/01.jpg)
+
+:::
+::::::::::::::
+
+
+## диаграмма 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/02.jpg)
+
+:::
+::::::::::::::
+
+# первая модель
+
+## Предельно допустимый диаметр домена коллизий в Fast Ethernet 
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/03.jpg)
+
+:::
+::::::::::::::
+
+## cумма размеров сегментов
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/04.jpg)
+
+:::
+::::::::::::::
+
+## вывод первой модели
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/05.jpg)
+
+:::
+::::::::::::::
+
+# вторая модель
+
+## предель
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/06.jpg)
+
+:::
+::::::::::::::
+
+
+## Временные задержки компонентов сети Fast Ethernet
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/07.jpg)
+
+:::
+::::::::::::::
+
+
+## таблица Временные задержки компонентов сети Fast Ethernet
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/08.jpg)
+
+:::
+::::::::::::::
+
+## расчет
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/09.jpg)
+
+:::
+::::::::::::::
+
+## таблица Время двойного оборота сети
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/10.jpg)
+
+:::
+::::::::::::::
+
+
+## таблица Время двойного оборота сети
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/11.jpg)
+
+:::
+::::::::::::::
+
+
+## расчет
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/12.jpg)
+
+:::
+::::::::::::::
+
+
+## сумма би
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/13.jpg)
+
+:::
+::::::::::::::
+
+## результат второй модели
+
+:::::::::::::: {.columns align=center}
+
+::: {.column width="70%"}
+
+![](./image/14.jpg)
+
+:::
+::::::::::::::
+
+# спасибо за внимание
+
+e
