@@ -11,7 +11,7 @@ author:
       address: ул. Миклухо-Маклая, д. 6
 ## Title
 title: презентация Лабораторной работы № 1
-subtitle: Простейший вариант
+subtitle: Методы кодирования и модуляция сигналов
 license: CC BY
 date: today
 date-format: "YYYY-MM-DD" # Example: 2025-09-06
